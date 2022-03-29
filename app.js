@@ -151,20 +151,10 @@ app.delete('/users/delete/:id', function(req, res){
 	});
 });
 
-app.get('/:id',function(req,res){
-	db.users.find({_id: ObjectId(req.params.id)}, function(err, result){
-		if (err){
-			console.log(err);
-		}
-		console.log(res)
-		res.redirect(303, '/');
-	});
-});
+app.post('/users/update/:id', function(req, res){
 
-app.post('/users/update/', function(req, res){
-	console.log("Pasa por update")
-	console.log(req)
-	db.users.replaceOne({_id: ObjectId(req.params.id)},{first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email}, function(err, result){
+	db.users.replaceOne({_id: ObjectId(req.params.id)},{'first_name': req.body.first_name, 'last_name': req.body.last_name, 'email': req.body.email}, 
+	function(err, result){
 		if (err){
 			console.log(err);
 		}
